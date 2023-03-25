@@ -12,4 +12,17 @@ function makeGrid(rows, cols) {
     }
 }
 
-makeGrid(16,16);
+function addEventListeners(){
+    const divs = document.querySelectorAll('.grid-cell');
+    divs.forEach((div) => {
+        // and for each one we add a 'click' listener
+        div.addEventListener('click', () => {
+            
+            div.style.cssText = "background-color:black;";
+        });
+      });
+}
+
+
+makeGrid(32,32);
+addEventListeners();

@@ -1,23 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+
 :root{
     --grid-cols: 1;
     --grid-rows: 1;
 }
 
 body{
+    font-family: 'Caveat';
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #4F6D7A;
+    text-align: center;
+}
+
+h1{
+    font-size: 72px;
+    color: #DD6E42;
+    margin: 5px;
+}
+
+button{
+    border: none;
+    padding: 10px 2px;
+    border-radius: 8px;
+    font-family: 'Caveat';
+    font-size: 32px;
+    flex-wrap: wrap;
+    min-width: 250px;
+    box-shadow: #DD6E42 5px 5px, #DD6E42 10px 10px;
 }
 
 .main-holder{
-    width: 100vh;
     padding: 20px;
-    border: solid, rgb(236, 144, 159), 10px;
+    border: solid, #E8DAB2, 10px;
     border-radius: 10px;
-    background-color: rgb(236, 144, 159);
+    background-color: #E8DAB2;
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    box-shadow: #DD6E42 5px 5px, #DD6E42 10px 10px;
 }
 
 .input-UI{
@@ -37,18 +60,21 @@ body{
 .button-holder{
     flex: 2;
     display: flex;
+    gap: 16px;
+    margin: 16px;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .grid-container{
     padding: 0;
-    margin: 0;
+    margin: 32px;
     display: grid;
-    grid-template-rows: repeat(var(--grid-rows), 32px);
-    grid-template-columns: repeat(var(--grid-cols), 32px);
+    grid-template-rows: repeat(var(--grid-rows), 16px);
+    grid-template-columns: repeat(var(--grid-cols), 16px);
 }
 
 .grid-cell {
-    background-color: blueviolet;
+    background-color: #EAEAEA;
 }
