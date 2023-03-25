@@ -12,17 +12,29 @@ function makeGrid(rows, cols) {
     }
 }
 
-function addEventListeners(){
+function addMouseDownEventListeners(){
     const divs = document.querySelectorAll('.grid-cell');
     divs.forEach((div) => {
         // and for each one we add a 'click' listener
-        div.addEventListener('click', () => {
-            
-            div.style.cssText = "background-color:black;";
-        });
+        div.addEventListener('mousedown', addMouseOverEventListeners);
+        div.addEventListener('mouseup', removeMouseOverEventListeners())
       });
 }
 
+function removeMouseOverEventListeners(e){
+    const divs = document.querySelectorAll('.grid-cell');
+    divs.forEach((div) => {
+        //div.removeEventListener('mouseover', drawWithBlack(div));
+      });
+}
+
+function drawWithBlack(e){
+    e.target.style.cssText = "background-color:black;";
+}
+
+function addMouseOverEventListeners(e) {
+    e.target.addEventListener('mouseover', drawWithBlack);
+}
 
 makeGrid(32,32);
-addEventListeners();
+addMouseDownEventListeners();
