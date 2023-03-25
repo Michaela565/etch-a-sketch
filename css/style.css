@@ -10,6 +10,37 @@ body{
     height: 100vh;
 }
 
+.main-holder{
+    width: 100vh;
+    padding: 20px;
+    border: solid, rgb(236, 144, 159), 10px;
+    border-radius: 10px;
+    background-color: rgb(236, 144, 159);
+    display: flex;
+    justify-content: space-around;
+}
+
+.input-UI{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.header-holder {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.button-holder{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .grid-container{
     padding: 0;
     margin: 0;
