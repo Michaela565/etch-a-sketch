@@ -15,26 +15,33 @@ function makeGrid(rows, cols) {
 function addMouseDownEventListeners(){
     const divs = document.querySelectorAll('.grid-cell');
     divs.forEach((div) => {
-        // and for each one we add a 'click' listener
-        div.addEventListener('mousedown', addMouseOverEventListeners);
-        div.addEventListener('mouseup', removeMouseOverEventListeners())
+        div.addEventListener('click', addMouseOverEventListeners);
       });
 }
 
-function removeMouseOverEventListeners(e){
+function removeMouseOverEventListeners(){
     const divs = document.querySelectorAll('.grid-cell');
+    console.log('i got up');
     divs.forEach((div) => {
-        //div.removeEventListener('mouseover', drawWithBlack(div));
+        div.removeEventListener('mouseover', drawWithBlack);
+        div.removeEventListener('click', removeMouseOverEventListeners);
+        div.addEventListener('click', addMouseDownEventListeners);
       });
 }
 
 function drawWithBlack(e){
-    e.target.style.cssText = "background-color:black;";
+    e.target.style.background = 'black';
 }
 
 function addMouseOverEventListeners(e) {
-    e.target.addEventListener('mouseover', drawWithBlack);
-}
+    const divs = document.querySelectorAll('.grid-cell');
 
+    divs.forEach((div) => {
+        div.removeEventListener('click', addMouseOverEventListeners);
+        div.addEventListener('mouseover',drawWithBlack);
+        div.addEventListener('click', removeMouseOverEventListeners);
+      });
+    
+}
 makeGrid(32,32);
 addMouseDownEventListeners();
