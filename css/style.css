@@ -31,7 +31,12 @@ button{
     min-width: 250px;
     box-shadow: #DD6E42 5px 5px, #DD6E42 10px 10px;
 }
-
+button:hover{
+    transform: translateY(2px);
+}
+button:active{
+    transform: translateY(4px);
+}
 .main-holder{
     padding: 20px;
     border: solid, #E8DAB2, 10px;

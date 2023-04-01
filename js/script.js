@@ -1,6 +1,17 @@
 const container = document.querySelector('.grid-container');
-
-
+const randomButton = document.querySelector('.random');
+const bwButton = document.querySelector('.bw');
+const eraseButton = document.querySelector('.eraser');
+let randomColor = false;
+let blackColor = true;
+let erase = () => {
+    if (blackColor == false && randomColor == false){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 
 function makeGrid(rows, cols) {
     container.style.setProperty('--grid-rows', rows);
@@ -12,8 +23,29 @@ function makeGrid(rows, cols) {
     }
 }
 
+function addButtonListeners(){
+
+}
+
+function pickAColorMode(){
+
+}
+
+function drawWithRandom(){
+
+}
+
+function erase(){
+
+}
+
+function drawWithBlack(e){
+    e.target.style.background = 'black';
+}
+
 function addMouseDownEventListeners(){
     const divs = document.querySelectorAll('.grid-cell');
+
     divs.forEach((div) => {
         div.addEventListener('click', addMouseOverEventListeners);
       });
@@ -21,7 +53,7 @@ function addMouseDownEventListeners(){
 
 function removeMouseOverEventListeners(){
     const divs = document.querySelectorAll('.grid-cell');
-    console.log('i got up');
+
     divs.forEach((div) => {
         div.removeEventListener('mouseover', drawWithBlack);
         div.removeEventListener('click', removeMouseOverEventListeners);
@@ -29,11 +61,7 @@ function removeMouseOverEventListeners(){
       });
 }
 
-function drawWithBlack(e){
-    e.target.style.background = 'black';
-}
-
-function addMouseOverEventListeners(e) {
+function addMouseOverEventListeners() {
     const divs = document.querySelectorAll('.grid-cell');
 
     divs.forEach((div) => {
@@ -43,5 +71,10 @@ function addMouseOverEventListeners(e) {
       });
     
 }
-makeGrid(32,32);
-addMouseDownEventListeners();
+
+function main(){
+    makeGrid(32,32);
+    addMouseDownEventListeners();
+}
+
+main();
