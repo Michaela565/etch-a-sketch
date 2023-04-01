@@ -24,18 +24,20 @@ function makeGrid(rows, cols) {
 }
 
 function addButtonListeners(){
-
+    randomButton.addEventListener('click', pickAColorMode);
+    bwButton.addEventListener('click', pickAColorMode);
+    eraseButton.addEventListener('click', pickAColorMode);
 }
 
-function pickAColorMode(){
-
+function pickAColorMode(e){
+    console.log(e.target);
 }
 
 function drawWithRandom(){
 
 }
 
-function erase(){
+function eraser(){
 
 }
 
@@ -75,6 +77,6 @@ function addMouseOverEventListeners() {
 function main(){
     makeGrid(32,32);
     addMouseDownEventListeners();
+    addButtonListeners();
 }
-
 main();
