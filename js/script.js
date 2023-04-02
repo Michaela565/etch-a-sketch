@@ -9,6 +9,7 @@ let blackColor = true;
 let erase = false;
 let userColor = "";
 
+// Gets the color from the color picker
 function update(picker) {
     userColor = picker.toRGBString();
 }
@@ -29,14 +30,14 @@ function makeGrid(rows, cols) {
         cell.classList.add('grid-cell');
         container.appendChild(cell);
     }
-    addMouseDownEventListeners();
+    removeMouseOverEventListeners();
 }
 
 function addButtonListeners() {
-    randomButton.addEventListener('click', switchToAColorMode);
-    bwButton.addEventListener('click', switchToAColorMode);
-    eraseButton.addEventListener('click', switchToAColorMode);
-    userPickButton.addEventListener('click', switchToAColorMode);
+    buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', switchToAColorMode);
+    })
 }
 
 function getRandomColor() {
@@ -48,7 +49,7 @@ function getRandomColor() {
     return color;
 }
 
-function pickAColorMode(e){
+function pickAColorMode(e) {
     if (blackColor){
         drawWithBlack(e)
     }
@@ -63,7 +64,8 @@ function pickAColorMode(e){
     }
 }
 
-function switchToAColorMode(e){
+// Switches to the right color input based on the input from buttons
+function switchToAColorMode(e) {
     switch(e.target){
         case bwButton:
             blackColor = true;
@@ -88,31 +90,24 @@ function switchToAColorMode(e){
     }
 }
 
-function userPickedColor(e){
+function userPickedColor(e) {
     e.target.style.background = userColor;
 }
 
-function drawWithRandom(e){
+function drawWithRandom(e) {
     e.target.style.background = getRandomColor();
 }
 
-function eraser(e){
+function eraser(e) {
     e.target.style.background = '#EAEAEA';
 }
 
-function drawWithBlack(e){
+function drawWithBlack(e) {
     e.target.style.background = 'black';
 }
 
-function addMouseDownEventListeners(){
-    const divs = document.querySelectorAll('.grid-cell');
-
-    divs.forEach((div) => {
-        div.addEventListener('click', addMouseOverEventListeners);
-      });
-}
-
-function removeMouseOverEventListeners(){
+// The remover for mouseover and now useless click listener, adds a new one
+function removeMouseOverEventListeners() {
     const divs = document.querySelectorAll('.grid-cell');
 
     divs.forEach((div) => {
@@ -122,6 +117,7 @@ function removeMouseOverEventListeners(){
       });
 }
 
+// Removes the old click event listener and puts on a new mouseover and click that removes off the mouseover listener
 function addMouseOverEventListeners() {
     const divs = document.querySelectorAll('.grid-cell');
 
@@ -137,4 +133,5 @@ function main(){
     makeGrid(slider.value,slider.value);
     addButtonListeners();
 }
+
 main();
