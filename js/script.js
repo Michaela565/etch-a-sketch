@@ -2,12 +2,14 @@ const container = document.querySelector('.grid-container');
 const randomButton = document.querySelector('.random');
 const bwButton = document.querySelector('.bw');
 const eraseButton = document.querySelector('.eraser');
+const userPickButton = document.querySelector('.user-color');
 let randomColor = false;
 let blackColor = true;
 let erase = false;
+let userColor = "";
 
 function update(picker){
-    return picker.toRGBString();
+    userColor = picker.toRGBString();
 }
 
 function makeGrid(rows, cols) {
@@ -24,6 +26,7 @@ function addButtonListeners(){
     randomButton.addEventListener('click', switchToAColorMode);
     bwButton.addEventListener('click', switchToAColorMode);
     eraseButton.addEventListener('click', switchToAColorMode);
+    userPickButton.addEventListener('click', switchToAColorMode);
 }
 
 function getRandomColor() {
@@ -36,23 +39,21 @@ function getRandomColor() {
 }
 
 function pickAColorMode(e){
-    console.log(blackColor, randomColor, erase);
     if (blackColor){
-        console.log('black');
         drawWithBlack(e)
     }
     else if (randomColor){
-        console.log('random');
         drawWithRandom(e);
     }
     else if (erase){
-        console.log('white');
         eraser(e);
+    }
+    else{
+        userPickedColor(e);
     }
 }
 
 function switchToAColorMode(e){
-    console.log(e.target);
     switch(e.target){
         case bwButton:
             blackColor = true;
@@ -68,11 +69,17 @@ function switchToAColorMode(e){
             blackColor = false;
             randomColor = false;
             erase = true;
+            break;
+        case userPickButton:
+            blackColor = false;
+            randomColor = false;
+            erase = false;
+            break;
     }
 }
 
 function userPickedColor(e){
-
+    e.target.style.background = userColor;
 }
 
 function drawWithRandom(e){
