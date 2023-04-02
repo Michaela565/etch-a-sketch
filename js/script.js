@@ -4,14 +4,7 @@ const bwButton = document.querySelector('.bw');
 const eraseButton = document.querySelector('.eraser');
 let randomColor = false;
 let blackColor = true;
-let erase = () => {
-    if (blackColor == false && randomColor == false){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
+let erase = false;
 
 function makeGrid(rows, cols) {
     container.style.setProperty('--grid-rows', rows);
@@ -24,21 +17,62 @@ function makeGrid(rows, cols) {
 }
 
 function addButtonListeners(){
-    randomButton.addEventListener('click', pickAColorMode);
-    bwButton.addEventListener('click', pickAColorMode);
-    eraseButton.addEventListener('click', pickAColorMode);
+    randomButton.addEventListener('click', switchToAColorMode);
+    bwButton.addEventListener('click', switchToAColorMode);
+    eraseButton.addEventListener('click', switchToAColorMode);
+}
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
 }
 
 function pickAColorMode(e){
+    console.log(blackColor, randomColor, erase);
+    if (blackColor){
+        console.log('black');
+        drawWithBlack(e)
+    }
+    else if (randomColor){
+        console.log('random');
+        drawWithRandom(e);
+    }
+    else if (erase){
+        console.log('white');
+        eraser(e);
+    }
+}
+
+function switchToAColorMode(e){
     console.log(e.target);
+    switch(e.target){
+        case bwButton:
+            blackColor = true;
+            randomColor = false;
+            erase = false;
+            break;
+        case randomButton:
+            randomColor = true;
+            blackColor = false;
+            erase = false;
+            break;
+        case eraseButton:
+            blackColor = false;
+            randomColor = false;
+            erase = true;
+    }
 }
 
-function drawWithRandom(){
-
+function drawWithRandom(e){
+    e.target.style.background = getRandomColor();
 }
 
-function eraser(){
-
+function eraser(e){
+    e.target.style.background = '#EAEAEA';
 }
 
 function drawWithBlack(e){
@@ -57,7 +91,7 @@ function removeMouseOverEventListeners(){
     const divs = document.querySelectorAll('.grid-cell');
 
     divs.forEach((div) => {
-        div.removeEventListener('mouseover', drawWithBlack);
+        div.removeEventListener('mouseover', pickAColorMode);
         div.removeEventListener('click', removeMouseOverEventListeners);
         div.addEventListener('click', addMouseDownEventListeners);
       });
@@ -68,7 +102,7 @@ function addMouseOverEventListeners() {
 
     divs.forEach((div) => {
         div.removeEventListener('click', addMouseOverEventListeners);
-        div.addEventListener('mouseover',drawWithBlack);
+        div.addEventListener('mouseover',pickAColorMode);
         div.addEventListener('click', removeMouseOverEventListeners);
       });
     
