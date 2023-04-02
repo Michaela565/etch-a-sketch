@@ -3,13 +3,22 @@ const randomButton = document.querySelector('.random');
 const bwButton = document.querySelector('.bw');
 const eraseButton = document.querySelector('.eraser');
 const userPickButton = document.querySelector('.user-color');
+const slider = document.querySelector('.slider');
 let randomColor = false;
 let blackColor = true;
 let erase = false;
 let userColor = "";
 
-function update(picker){
+function update(picker) {
     userColor = picker.toRGBString();
+}
+
+function generateNewGrid() {
+    let cells = document.querySelectorAll('.grid-cell');
+    cells.forEach((cell) => {
+        cell.remove();
+    });
+    makeGrid(slider.value, slider.value);
 }
 
 function makeGrid(rows, cols) {
@@ -20,9 +29,10 @@ function makeGrid(rows, cols) {
         cell.classList.add('grid-cell');
         container.appendChild(cell);
     }
+    addMouseDownEventListeners();
 }
 
-function addButtonListeners(){
+function addButtonListeners() {
     randomButton.addEventListener('click', switchToAColorMode);
     bwButton.addEventListener('click', switchToAColorMode);
     eraseButton.addEventListener('click', switchToAColorMode);
@@ -124,8 +134,7 @@ function addMouseOverEventListeners() {
 }
 
 function main(){
-    makeGrid(32,32);
-    addMouseDownEventListeners();
+    makeGrid(slider.value,slider.value);
     addButtonListeners();
 }
 main();

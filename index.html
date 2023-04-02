@@ -15,8 +15,11 @@
             <div class="header-holder">
                 <h1 class="header">Etch a sketch</h1>
             </div>
+            <div class="slider-container">
+                <input type="range" min="16" max="48" value="32" step="16" class="slider" oninput="generateNewGrid()">
+            </div>
             <div class="colorPickerHolder">
-                <input value="#FFFFFF" data-jscolor="{onInput:'update(this)'}">
+                <input class="color-picker" value="#FFFFFF" data-jscolor="{onInput:'update(this)'}">
             </div>
             <div class="button-holder">
                 <button class="user-color">picked color</button>
