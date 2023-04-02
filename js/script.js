@@ -6,6 +6,10 @@ let randomColor = false;
 let blackColor = true;
 let erase = false;
 
+function update(picker){
+    return picker.toRGBString();
+}
+
 function makeGrid(rows, cols) {
     container.style.setProperty('--grid-rows', rows);
     container.style.setProperty('--grid-cols', cols);
@@ -65,6 +69,10 @@ function switchToAColorMode(e){
             randomColor = false;
             erase = true;
     }
+}
+
+function userPickedColor(e){
+
 }
 
 function drawWithRandom(e){
