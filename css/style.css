@@ -13,12 +13,17 @@ body{
     height: 100vh;
     background-color: #4F6D7A;
     text-align: center;
+    flex-direction: column;
 }
 
 h1{
     font-size: 72px;
     color: #DD6E42;
     margin: 5px;
+}
+
+footer{
+    font-size: 18px;
 }
 
 button{
@@ -70,6 +75,8 @@ button:active{
     background-color: #EAEAEA;
     outline: none;
     border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .slider::-webkit-slider-thumb{
