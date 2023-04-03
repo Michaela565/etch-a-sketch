@@ -30,7 +30,7 @@ function makeGrid(rows, cols) {
         cell.classList.add('grid-cell');
         container.appendChild(cell);
     }
-    removeMouseOverEventListeners();
+    addMouseDownEventListeners();
 }
 
 function addButtonListeners() {
@@ -104,6 +104,14 @@ function eraser(e) {
 
 function drawWithBlack(e) {
     e.target.style.background = 'black';
+}
+
+function addMouseDownEventListeners(){
+    const divs = document.querySelectorAll('.grid-cell');
+
+    divs.forEach((div) => {
+        div.addEventListener('click', addMouseOverEventListeners);
+      });
 }
 
 // The remover for mouseover and now useless click listener, adds a new one
