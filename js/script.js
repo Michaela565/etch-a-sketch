@@ -3,6 +3,7 @@ const randomButton = document.querySelector('.random');
 const bwButton = document.querySelector('.bw');
 const eraseButton = document.querySelector('.eraser');
 const userPickButton = document.querySelector('.user-color');
+const resetButton = document.querySelector('.reset');
 const slider = document.querySelector('.slider');
 let randomColor = false;
 let blackColor = true;
@@ -12,6 +13,9 @@ let userColor = "";
 // Gets the color from the color picker
 function update(picker) {
     userColor = picker.toRGBString();
+    blackColor = false;
+    randomColor = false;
+    erase = false;
 }
 
 function generateNewGrid() {
@@ -82,11 +86,8 @@ function switchToAColorMode(e) {
             randomColor = false;
             erase = true;
             break;
-        case userPickButton:
-            blackColor = false;
-            randomColor = false;
-            erase = false;
-            break;
+        case resetButton:
+            generateNewGrid();
     }
 }
 
