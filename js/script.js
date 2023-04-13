@@ -5,6 +5,8 @@ const eraseButton = document.querySelector('.eraser');
 const userPickButton = document.querySelector('.user-color');
 const resetButton = document.querySelector('.reset');
 const slider = document.querySelector('.slider');
+const SQUAREWH = 512;
+
 let randomColor = false;
 let blackColor = true;
 let erase = false;
@@ -29,6 +31,7 @@ function generateNewGrid() {
 function makeGrid(rows, cols) {
     container.style.setProperty('--grid-rows', rows);
     container.style.setProperty('--grid-cols', cols);
+    container.style.setProperty('--grid-cell', SQUAREWH/rows + "px");
     for (let i = 0; i < rows*cols; i++) {
         const cell = document.createElement('div');
         cell.classList.add('grid-cell');
