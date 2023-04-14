@@ -11,15 +11,18 @@ const SQUAREWH = 512;
 let randomColor = false;
 let blackColor = true;
 let erase = false;
-let fill = false;
+let shouldFill = false;
 let userColor = "";
+let cellCount = 0;
+let gridSize = 0;
+let currentColor = "";
+let currentBackgroundColor = "";
 
 // Gets the color from the color picker
 function update(picker) {
     userColor = picker.toRGBString();
-    blackColor = false;
-    randomColor = false;
-    erase = false;
+    currentColor = userColor;
+    blackColor = randomColor = erase = shouldFill = false;
 }
 
 function generateNewGrid() {
@@ -27,16 +30,20 @@ function generateNewGrid() {
     cells.forEach((cell) => {
         cell.remove();
     });
-    makeGrid(slider.value, slider.value);
+    cellCount = 0;
+    makeGrid(slider.value , slider.value);
 }
 
 function makeGrid(rows, cols) {
     container.style.setProperty('--grid-rows', rows);
     container.style.setProperty('--grid-cols', cols);
     container.style.setProperty('--grid-cell', SQUAREWH/rows + "px");
+    gridSize = parseInt(rows);
     for (let i = 0; i < rows*cols; i++) {
         const cell = document.createElement('div');
         cell.classList.add('grid-cell');
+        cell.id = i+1;
+        cellCount ++;
         container.appendChild(cell);
     }
     addMouseDownEventListeners();
@@ -47,6 +54,10 @@ function addButtonListeners() {
     buttons.forEach((button) => {
         button.addEventListener('click', switchToAColorMode);
     })
+}
+
+function convertToRGB(rbg){
+    return rbg.replace(/\s/g, '');
 }
 
 function getRandomColor() {
@@ -69,6 +80,9 @@ function pickAColorMode(e) {
         case erase:
             eraser(e);
             break;
+        case shouldFill:
+            fill(parseInt(e.target.id), convertToRGB(e.target.style.backgroundColor), currentColor);
+            break;
         default:
             userPickedColor(e);
             break;
@@ -77,7 +91,7 @@ function pickAColorMode(e) {
 
 // Switches to the right color input based on the input from buttons
 function switchToAColorMode(e) {
-    blackColor = randomColor = erase = fill = false;
+    blackColor = randomColor = erase = shouldFill = false;
     switch(e.target){
         case bwButton:
             blackColor = true;
@@ -89,7 +103,7 @@ function switchToAColorMode(e) {
             erase = true;
             break;
         case fillButton:
-            fill = true;
+            shouldFill = true;
             break;
         case resetButton:
             generateNewGrid();
@@ -106,11 +120,36 @@ function drawWithRandom(e) {
 }
 
 function eraser(e) {
-    e.target.style.background = '#EAEAEA';
+    currentColor = 'rgb(234,234,234)';
+    e.target.style.background = 'rgb(234,234,234)';
 }
 
 function drawWithBlack(e) {
-    e.target.style.background = 'black';
+    currentColor = 'rgb(0,0,0)';
+    e.target.style.background = 'rgb(0,0,0)';
+}
+
+function fill(position, prevColor, newColor){
+    if(position <= 0 || position > cellCount){
+        return;
+    }
+    let bgColor = convertToRGB(document.getElementById(position.toString()).style.backgroundColor);
+    if(bgColor != prevColor){
+        return;
+    }
+    if(bgColor == newColor){
+        return;
+    }
+    
+    if(bgColor == prevColor){
+        console.log('why no work');
+        document.getElementById(position.toString()).style.backgroundColor = newColor;
+    }
+    fill(position+1, prevColor, newColor);
+    fill(position-1, prevColor, newColor);
+    fill(position+gridSize, prevColor, newColor);
+    fill(position-gridSize, prevColor, newColor);
+
 }
 
 function addMouseDownEventListeners(){
