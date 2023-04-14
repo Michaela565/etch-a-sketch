@@ -130,19 +130,11 @@ function drawWithBlack(e) {
 }
 
 function fill(position, prevColor, newColor){
-    if(position <= 0 || position > cellCount){
-        return;
-    }
+    if(position <= 0 || position > cellCount)return;
     let bgColor = convertToRGB(document.getElementById(position.toString()).style.backgroundColor);
-    if(bgColor != prevColor){
-        return;
-    }
-    if(bgColor == newColor){
-        return;
-    }
-    
+    if(bgColor != prevColor)return;
+    if(bgColor == newColor)return;
     if(bgColor == prevColor){
-        console.log('why no work');
         document.getElementById(position.toString()).style.backgroundColor = newColor;
     }
     fill(position+1, prevColor, newColor);
