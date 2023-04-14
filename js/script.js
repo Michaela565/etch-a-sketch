@@ -4,12 +4,14 @@ const bwButton = document.querySelector('.bw');
 const eraseButton = document.querySelector('.eraser');
 const userPickButton = document.querySelector('.user-color');
 const resetButton = document.querySelector('.reset');
+const fillButton = document.querySelector('.fill');
 const slider = document.querySelector('.slider');
 const SQUAREWH = 512;
 
 let randomColor = false;
 let blackColor = true;
 let erase = false;
+let fill = false;
 let userColor = "";
 
 // Gets the color from the color picker
@@ -57,40 +59,41 @@ function getRandomColor() {
 }
 
 function pickAColorMode(e) {
-    if (blackColor){
-        drawWithBlack(e)
-    }
-    else if (randomColor){
-        drawWithRandom(e);
-    }
-    else if (erase){
-        eraser(e);
-    }
-    else{
-        userPickedColor(e);
+    switch (true) {
+        case blackColor:
+            drawWithBlack(e)
+            break;
+        case randomColor:
+            drawWithRandom(e);
+            break;
+        case erase:
+            eraser(e);
+            break;
+        default:
+            userPickedColor(e);
+            break;
     }
 }
 
 // Switches to the right color input based on the input from buttons
 function switchToAColorMode(e) {
+    blackColor = randomColor = erase = fill = false;
     switch(e.target){
         case bwButton:
             blackColor = true;
-            randomColor = false;
-            erase = false;
             break;
         case randomButton:
             randomColor = true;
-            blackColor = false;
-            erase = false;
             break;
         case eraseButton:
-            blackColor = false;
-            randomColor = false;
             erase = true;
+            break;
+        case fillButton:
+            fill = true;
             break;
         case resetButton:
             generateNewGrid();
+            break;
     }
 }
 

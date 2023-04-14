@@ -12,7 +12,13 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #4F6D7A;
+    background: repeating-linear-gradient(
+        45deg,
+        #4F6D7A,
+        #4F6D7A 50px,
+        #7b96a1 50px,
+        #7b96a1 60px
+      );
     text-align: center;
     flex-direction: column;
 }
