@@ -120,8 +120,8 @@ function drawWithRandom(e) {
 }
 
 function eraser(e) {
-    currentColor = 'rgb(234,234,234)';
-    e.target.style.background = 'rgb(234,234,234)';
+    currentColor = 'rgb(255,255,255)';
+    e.target.style.background = 'rgb(255,255,255)';
 }
 
 function drawWithBlack(e) {
